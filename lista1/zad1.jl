@@ -60,7 +60,7 @@ epsilon_double = machine_epsilon(Float64)
 print(epsilon_double, "   ", eps(Float64), "\n")
 
 
-println("==========================================================\n")
+println("\n==========================================================\n")
 
 
 # Dla typu Float16
