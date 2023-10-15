@@ -6,7 +6,6 @@ while x <= 2
         global równomiernie_rozmieszone = false
         break
     end
-    println(x)
     global x = nextfloat(x)
 end
 
