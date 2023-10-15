@@ -6,6 +6,7 @@ actual = dfdx(1)
 
 for n in 0:54
     println("\nh = 2^-$n:")
-    println("approx f'(1)    =   ", dfdx_approx(1, Float64(2)^-n, f))
-    println("actual f'(1)    =   ", actual)
+    println(" f'(1)                     =   ", dfdx_approx(1, Float64(2)^-n, f))
+    println("~f'(1)                     =   ", actual)
+    println("error |f'(1) - ~f'(1)|     =   ", abs(dfdx_approx(1, Float64(2)^-n, f) - actual))
 end
