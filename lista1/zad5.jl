@@ -1,3 +1,7 @@
+# Author: Adrian Herda
+
+# Funkcja zwraca iloczyn skalarany x oraz y liczony "w przód"
+# T to typ zmiennej
 function a(x, y, T)
     result = T(0)
     n = length(x)
@@ -9,6 +13,8 @@ function a(x, y, T)
     return result
 end
 
+# Funkcja zwraca iloczyn skalarany x oraz y liczony "w tył"
+# T to typ zmiennej
 function b(x, y, T)
     result = T(0)
     n = length(x)
@@ -20,6 +26,10 @@ function b(x, y, T)
     return result
 end
 
+# Funkcja zwraca iloczyn skalarany x oraz y liczony:
+#       Dodatnie od największego do najmniejszego
+#       Ujemne od najmnijeszego do największego
+# T to typ zmiennej
 function c(x, y, T)
     to_sum = x .* y
 
@@ -40,6 +50,10 @@ function c(x, y, T)
     return sum
 end
 
+# Funkcja zwraca iloczyn skalarany x oraz y liczony:
+#       Dodatnie od najmnijeszego do największego
+#       Ujemne od największego do najmniejszego
+# T to typ zmiennej
 function d(x, y, T)
     to_sum = x .* y
 

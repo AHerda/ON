@@ -1,3 +1,9 @@
+# Author: Adrian Herda
+
+# Funkcja znajduje liczbę nie spełniająca równania x * 1/x = 1 w przedziale (start, end_)
+# parametr func to funkcja która wyzancza kolejną sprawdzaną liczbę
+# zwraca: znaleziono - true jeśli znaleziono liczbę nie spełniającą równania lub false jeśli nie znaleziono
+#         start - jeśli znaleziono jest true to będzie to liczba nie spęlniająca rówania
 function find_ne(start, end_, func)
     flag = true
     if start > end_
@@ -14,5 +20,6 @@ function find_ne(start, end_, func)
     return (start, znaleziono)
 end
 
-println("Szukanie liczby nie spełniającej działania x * 1/x na początku przedziału (1, 2): ", find_ne(nextfloat(Float64(1)), prevfloat(Float64(2)), nextfloat))
-println("Szukanie liczby nie spełniającej działania x * 1/x na końcu przedziału (1, 2): ", find_ne(prevfloat(Float64(2)), nextfloat(Float64(1)), prevfloat))
+println("Szukanie liczby nie spełniającej działania x * 1/x = 1 na początku przedziału (1, 2): ", find_ne(nextfloat(Float64(1)), prevfloat(Float64(2)), nextfloat))
+println("Szukanie liczby nie spełniającej działania x * 1/x = 1 na końcu przedziału (1, 2): ", find_ne(prevfloat(Float64(2)), nextfloat(Float64(1)), prevfloat))
+println("Najmniejsza liczba nie spełniająca równania x * 1/x = 1 w przedziale (1, 2): ", find_ne(nextfloat(Float64(1)), prevfloat(Float64(2)), nextfloat))
