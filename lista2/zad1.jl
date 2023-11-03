@@ -30,7 +30,7 @@ end
 #       Dodatnie od największego do najmniejszego
 #       Ujemne od najmnijeszego do największego
 # T to typ zmiennej
-function c(x, y, T)
+function c1(x, y, T)
     to_sum = x .* y
 
     sum_positive = filter(a -> a >= 0, to_sum)
@@ -87,9 +87,12 @@ for T in [Float32, Float64]
     tab12 = Array{T}(x2)
     tab2 = Array{T}(y)
     println("--- $T ---")
-    println(rpad("", 15), rpad("Lista 1", 25), "Lista 2")
-    for i in [a, b, c, d]
-        println(rpad("Funkcja $i:", 15), rpad(i(tab1, tab2, T), 25), i(tab12, tab2, T))
+    println(rpad("", 15), " & ", rpad("Lista 1", 25), " & Lista 2 \\\\ \\hline\\hline")
+    for i in [a, b, c1, d]
+        println(rpad("Funkcja $i:", 15),
+                " & ", rpad(i(tab1, tab2, T), 25),
+                " & ", i(tab12, tab2, T),
+                " \\\\ \\hline")
     end
     println()
 end

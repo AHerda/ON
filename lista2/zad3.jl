@@ -34,7 +34,7 @@ println(rpad("n", 5),
         " & ", rpad("\$rank(A)\$", 10), 
         " & ", rpad("Błąd eliminacji Gaussa", 25), 
         " & Błąd metody inwersji", 
-        " \\\\\n\\hline")
+        " \\\\ \\hline\\hline")
 for n in 1:3:52
     A = hilb(n)
     local err = calculate_err(A, n)
@@ -43,7 +43,7 @@ for n in 1:3:52
         " & ", rpad(rank(A), 10),
         " & ", rpad(err[1], 25),
         " & ", err[2],
-        " \\\\\n\\hline")
+        " \\\\ \\hline")
 end
 
 
@@ -54,7 +54,7 @@ println(rpad("n", 5),
         " & ", rpad("\$rank(A)\$", 10), 
         " & ", rpad("Błąd eliminacji Gaussa", 25), 
         " & Błąd metody inwersji", 
-        " \\\\\n\\hline")
+        " \\\\ \\hline\\hline")
 for n in [5, 10, 20]
     for log_10_c in [0, 1, 3, 7, 12, 16]
         A = matcond(n, 10.0^log_10_c)
@@ -64,6 +64,6 @@ for n in [5, 10, 20]
             " & ", rpad(rank(A), 10),
             " & ", rpad(err[1], 25),
             " & ", err[2],
-            " \\\\\n\\hline")
+            " \\\\ \\hline")
     end
 end
