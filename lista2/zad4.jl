@@ -1,5 +1,7 @@
 # Author: Adrian Herda 268449
 
+import Pkg
+Pkg.add("Polynomials")
 using Polynomials
 
 # Podpunkt a)
@@ -14,9 +16,12 @@ coefficients = [1, -210.0, 20615.0,-1256850.0,
 13803759753640704000.0,      -8752948036761600000.0,
 2432902008176640000.0]
 
-P = Polynomial(reverse(coefficients))
-p = Polynomial(fromroots(1:20))
+# Tworzenie wielomianó:
+# odpowiednio formie normalnej i iloczynwowej
+P = Polynomial(reverse(coefficients)) # duże P
+p = Polynomial(fromroots(1.0:20.0)) # małe p
 
+#obliczanie pierwiastków wielomianu P (duże p)
 z_k = roots(P)
 
 println("\n\n---- Podpunkt a ----")
@@ -36,10 +41,11 @@ end
 
 # Podpunkt b)
 
+# zmiana drugie współczynnika z listy współczynników 
 coefficients[2] -= 2^(-23)
 
 P = Polynomial(reverse(coefficients))
-p = Polynomial(fromroots(1:20))
+p = Polynomial(fromroots(1.0:20.0))
 
 z_k = roots(P)
 

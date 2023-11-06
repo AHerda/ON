@@ -1,8 +1,11 @@
 # Author: Adrian Herda 268449
 
+# Dodawanie funkcji danych za listą do pliku
 include("hilb.jl")
 include("matcond.jl")
 
+# funkcja rozwiązuje układ równań liniowych za pomoća metody Gaussa
+# jako paramtey pobiera Macierz A oraz jej wielkość n
 function solve_guass(A, n)
     x = ones(Float64, n)
     b = A * x
@@ -10,6 +13,8 @@ function solve_guass(A, n)
     return A \ b
 end
 
+# funkcja rozwiązuje układ równań liniowych za pomoća metody inwersji
+# jako paramtey pobiera Macierz A oraz jej wielkość n
 function solve_inverse(A, n)
     x = ones(Float64, n)
     b = A * x
@@ -17,6 +22,8 @@ function solve_inverse(A, n)
     return inv(A) * b
 end
 
+# funkcja wylicza błędy obu metod rozwiązywania równań liniowych
+# Za parametry bierze macierz A i jej wielkość jako n
 function calculate_err(A, n)
     gauss = solve_guass(A, n)
     inverse = solve_inverse(A, n)

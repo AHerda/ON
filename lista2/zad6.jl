@@ -1,7 +1,12 @@
 # Author: Adrian Herda 268449
 
+
+# funkcja obliczjąca x_{n+1} na podstawie x_n orac c1
+# za parametry bierze x (poprzednie x) oraz c
 next(x, c) = x^2 + c
 
+#inicjowanie wartości c oraz x_0
+# wektor x nazywa się x a nie x_0 ze względu na to że będziemy pracować na bezpośrednio tych wartościach 
 x = [[1, 2, 1.99999999999999], [1, -1, 0.75, 0.25]]
 c = [-2, -1]
 

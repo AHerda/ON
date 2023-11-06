@@ -1,9 +1,14 @@
 # Author: Adrian Herda 268449
 
+# Funkcja obliczająca p_{n+1} na podstawie p_n oraz r
+#za paramtry przyjmuje p (poprzednie p) oraz r
 next(p, r) = p + r * p * (1 - p)
 
 # Podpunkt 1.
 println("\n\n---- Podpunkt 1 ----")
+
+#inicjowanie liczb początkoweych
+# liczba_odc to zmienna która przy 10 iteracji ma odcinaną część
 liczba = Float32(0.01)
 liczba_odc = Float32(0.01)
 r = Float32(3)
@@ -29,6 +34,8 @@ end
 # Podpunkt 2.
 
 println("\n\n---- Podpunkt 2 ----")
+
+#inicjowanie danych i ustalanie ich arytmetyki
 liczba1 = Float32(0.01)
 liczba2 = Float64(0.01)
 r1 = Float32(3)
