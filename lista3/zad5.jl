@@ -1,3 +1,5 @@
+# Author: Adrian Herda 268449
+
 include("zad123.jl")
 using .mod123
 
@@ -9,7 +11,7 @@ delta = 10^(-4)
 epsilon = 10^(-4)
 
 (x0, fx0, it, err) = mbisekcji(h, 0., 1., delta, epsilon)
-println("Pierwsze przecięcie:\n\tx_0 = ", x0, "\n\tf(x_0) = ", f(x0))
+println("Pierwsze przecięcie:\n\tx_0 = ", x0, "\n\tf(x_0) = ", f(x0), "\n\tit = ", it)
 
 (x0, fx0, it, err) = mbisekcji(h, 1., 2., delta, epsilon)
-println("\nDrugie przecięcie:\n\tx_0 = ", x0, "\n\tf(x_0) = ", f(x0))
+println("\nDrugie przecięcie:\n\tx_0 = ", x0, "\n\tf(x_0) = ", f(x0), "\n\tit = ", it)

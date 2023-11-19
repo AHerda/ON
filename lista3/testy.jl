@@ -23,26 +23,26 @@ using Test
 
     # bardzo płaska funkcja
 
-    f(x) =  1 / x - 0.05
-    r = 20.
+    f(x) =  1 / x - 0.001
+    r = 1000.
 
-    res = mbisekcji(f, 10., 25., delta, epsilon)
+    res = mbisekcji(f, 990., 1100., delta, epsilon)
     x = res[1]
     fx = res[2]
-
+    println(r, " ", x)
     @test abs(fx) <= epsilon
     @test abs(r - x) > delta
     @test res[4] == 0
 
     # a teraz bardzo stroma
 
-    f(x) = exp(x) - exp(3)
-    r = 3.
+    f(x) = exp(x) - exp(10)
+    r = 10.
 
-    res = mbisekcji(f, 2.5, 4., delta, epsilon)
+    res = mbisekcji(f, 9., 12., delta, epsilon)
     x = res[1]
     fx = res[2]
-
+    println(r, " ", x)
     @test abs(fx) > epsilon
     @test abs(r - x) <= delta
     @test res[4] == 0
@@ -74,7 +74,7 @@ end
     @test abs(r - x) <= delta
     @test res[4] == 0
 
-    # funkcja wpada w punkt przegięcia
+    # funkcja wpada w punkt z pochodną bliską zeru
 
     res = mstycznych(f, df, 0.8, delta, epsilon, 10)
 

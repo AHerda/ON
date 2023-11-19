@@ -1,3 +1,5 @@
+# Author: Adrian Herda 268449
+
 module mod123
     export mbisekcji, mstycznych, msiecznych
 

@@ -1,13 +1,11 @@
+# Author: Adrian Herda 268449
+
 include("zad123.jl")
 using .mod123
 
-function f(x)
-    sin(x) - (1/4)x^2
-end
+f(x) = sin(x) - (x / 2)^2
 
-function fPrim(x)
-    cos(x) - (1/2)x
-end
+pf(x) = cos(x) - x / 2
 
 delta = (1/2)*(10^(-5))
 epsilon = (1/2)*(10^(-5))
@@ -29,7 +27,7 @@ println(rpad("Metoda Bisekcji" , 20),
     " & ", rpad(err, 10),
     "\\\\ \\hline")
 
-(x0, fx0, it, err) = mstycznych(f, fPrim, 1.5, delta, epsilon, 100)
+(x0, fx0, it, err) = mstycznych(f, pf, 1.5, delta, epsilon, 100)
 println(rpad("Metoda Stycznych" , 20),
     " & ", rpad(x0, 20),
     " & ", rpad(fx0, 25),
