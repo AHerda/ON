@@ -1,4 +1,6 @@
-include("zad123.jl")
+# Author: Adrian Herda 268449
+
+include("zad1234.jl")
 using .mod123
 
 e(x) = exp(x)

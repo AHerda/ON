@@ -1,3 +1,5 @@
+# Author: Adrian Herda 268449
+
 module mod123
     export ilorazyRoznicowe, warNewton, naturalna, rysujNnfx
     
@@ -104,44 +106,34 @@ module mod123
     # Wyniki
     p – obiekt rysunku z wykresami wielomianu i funkcji
     """
-    function rysujNnfx(f, a :: Float64, b :: Float64, n :: Int)
-        if a > b
-            a, b = b, a
+    function rysujNnfx(f,a::Float64,b::Float64,n::Int)
+        x = zeros(n+1)
+        y = zeros(n+1)
+        h = (b-a)/n
+        for k in 0:n
+            x[k+1] = a + k*h
+            y[k+1] = f(x[k+1])
         end
-
-        steps = n + 1
-
-        xs = Vector{Float64}(undef, steps)
-        ys = Vector{Float64}(undef, steps)
-
-        currentDelta = zero(Float64)
-        for i in 1:steps
-            xs[i] = a + currentDelta
-            ys[i] = f(xs[i])
-            currentDelta += (b - a) / (steps - 1)
-        end
-
-        density = 10
-        steps = (n + 1) * density
-
-        qs = ilorazyRoznicowe(xs, ys)
-        interpolationXs = Vector{Float64}(undef, steps)
-        interpolationVals = Vector{Float64}(undef, steps)
-        realVals = Vector{Float64}(undef, steps)
-
-        currentDelta = zero(Float64)
-        for i in 1:steps
-            interpolationXs[i] = a + currentDelta
-            interpolationVals[i] = warNewton(xs, qs, a + currentDelta)
-            realVals[i] = f(a + currentDelta)
-            currentDelta += (b - a) / (steps - 1)
+        c = ilorazyRoznicowe(x, y)
+    
+        points = 50 * (n+1)
+        dx = (b-a)/(points-1)
+        xs = zeros(points)
+        poly = zeros(points)
+        func = zeros(points)
+        xs[1] = a
+        poly[1] = func[1] = y[1]
+        for i in 2:points
+            xs[i] = xs[i-1] + dx
+            poly[i] = warNewton(x, c, xs[i])
+            func[i] = f(xs[i])
         end
 
         clf()
-        plot(interpolationXs, interpolationVals, label="interpolated", linewidth=2.0, alpha=0.5, color="#0070ff")
-        plot(interpolationXs, realVals, label="actual", linewidth=2.0, alpha=0.5, color="#ff7000")
+        plot(xs, poly, label="wielomian", linewidth=2.0, alpha=0.5, color="#0070ff")
+        plot(xs, func, label="funkcja", linewidth=2.0, alpha=0.5, color="#ff7000")
         grid(true)
         legend(title="Interpolation")
-        savefig(string("plots/plot", "-", f, "-", n, ".png"))
+        savefig(string("plots/plot-", f, "-", n, ".png"))
     end
 end
