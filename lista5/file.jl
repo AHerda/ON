@@ -3,9 +3,10 @@
 include("sparse_matrix.jl")
 
 module File
-	export loadMatrix, loadVector, loadMatrixMy, writeVector
+	export loadMatrixPlus, loadVector, loadMatrixMy, writeVector, relative_error
 
-	using ..SparseMatrix: SparseMatrixMy, setvalue!, getvalue!, generate_rhs_vector
+	using LinearAlgebra: norm
+	using ..SparseMatrix: SparseMatrixMy, SparseMatrixPlus, generate_rhs_vector
 	using SparseArrays
 
 	"""
@@ -15,28 +16,25 @@ module File
 		filepath - path to input file
 
 	Output:
-	(A, n, l) - tuple:
-		A - matrix;
-		n - size of matrix A
-		l - size of submatrices
+		A - custom Struct with SparseMatrixCSC inside
 	"""
-	function loadMatrix(filepath::String)::Tuple{SparseMatrixCSC{Float64, Int64}, UInt64, UInt64}
+	function loadMatrixPlus(filepath::String) :: SparseMatrixPlus
 		data = open(filepath, "r") do file
 			sizes = split(readline(file), " ")
-			n = parse(Int64, sizes[1])
-			l = parse(Int64, sizes[2])
+			n = parse(UInt64, sizes[1])
+			l = parse(UInt64, sizes[2])
 
-			columns = []
-			rows = []
-			values = []
-
+			A = spzeros(Float64, n, n)
 			for line in eachline(file)
-				temp = split(line, " ")
-				push!(columns, parse(Int64, temp[1]))
-				push!(rows, parse(Int64, temp[2]))
-				push!(values, parse(Float64, temp[3]))
+				data = split(line, " ")
+				i = parse(UInt64, data[1])
+				j = parse(UInt64, data[2])
+				value = parse(Float64, data[3])
+
+				A[i, j] = value
 			end
-			(sparse(rows, columns, values), n, l)
+
+			SparseMatrixPlus(n, l, A, 0)
 		end
 
 		return data
@@ -51,7 +49,7 @@ module File
 
 	Output:
 	(b, n) - tuple:
-		b - vector of right sides;
+		b - vector of right sides
 		n - size of vector b
 	"""
 	function loadVector(filepath::String)::Tuple{Vector{Float64}, UInt64}
@@ -76,12 +74,9 @@ module File
 		filepath - path to input file
 
 	Output:
-		(A, n, l) - tuple:
-		A - my custom struct SparseMatrixMy;
-		n - size of matrix A;
-		l - size of submatrices
+		A - my custom struct SparseMatrixMy
 	"""
-	function loadMatrixMy(filepath::String)::Tuple{SparseMatrixMy, UInt64, UInt64}
+	function loadMatrixMy(filepath::String) :: SparseMatrixMy
 		data = open(filepath, "r") do file
 			sizes = split(readline(file), " ")
 			n = parse(UInt64, sizes[1])
@@ -95,9 +90,9 @@ module File
 				j = parse(UInt64, temp[2])
 				value = parse(Float64, temp[3])
 
-				setvalue!(A, i, j, value)
+				A[i, j] = value
 			end
-			(A, n, l)
+			A
 		end
 
 		return data
