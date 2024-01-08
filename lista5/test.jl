@@ -4,7 +4,7 @@ include("matrixgen.jl")
 include("blocksys.jl")
 
 using .blocksys: solve_gauss, solve_gauss_with_pivot, solve_LU, solve_LU_with_pivot
-using .File: loadMatrixMy, loadVector, writeVector
+using .File: loadMatrixMy, loadMatrixPlus, loadVector, writeVector
 using Test
 
 n_list = [16, 10000, 50000, 100000, 300000]
